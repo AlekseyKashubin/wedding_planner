@@ -1,0 +1,31 @@
+@model Wedding
+
+
+
+
+
+    <form asp-action="Create" asp-controller="Wedding" method="post" class="col-12">
+        <div class="mb-3">
+            <label asp-for="Groom"></label>
+            <Input asp-for="Groom" class="form-control"></Input>
+            <span asp-validation-for="Groom" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Bride"></label>
+            <Input asp-for="Bride" class="form-control"></Input>
+            <span asp-validation-for="Bride" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="WeddingDate"></label>
+            <Input asp-for="WeddingDate" type="Date" class="form-control"></Input>
+            <span asp-validation-for="WeddingDate" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address"></label>
+            <Input asp-for="Address" class="form-control"></Input>
+            <span asp-validation-for="Address" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-outline-primary">submit</button>
+        </div>
+    </form>

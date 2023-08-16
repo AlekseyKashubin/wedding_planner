@@ -1,0 +1,50 @@
+@model List<Wedding>
+
+
+
+    <table class="table text-light">
+        <tr>
+            <th>Wedding Of</th>
+            <th>Date</th>
+            <th>Guest Count</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (Wedding w in Model)
+        {
+
+            bool alreadyRsvpd = w.RSVPers.Any(x => x.UserId == Context.Session.GetInt32("UUID") && w.WeddingId == x.WeddingId);
+
+            <tr>
+                <td> <a asp-action="Details" asp-controller="Wedding" asp-route-id="@w.WeddingId" class="text-light text-decoration-none">@w.Bride & @w.Groom</a></td>
+                <td>@w.WeddingDate.ToString("MMM d, yyyy")</td>
+                <td>@w.RSVPers.Count</td>
+                <td>
+                    @if (w.UserId == Context.Session.GetInt32("UUID"))
+                    {
+                        <form asp-controller="Wedding" asp-action="Delete" asp-route-id="@w.WeddingId">
+                            <button class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    }
+                    else
+                    {
+                    <form asp-controller="Wedding" asp-action="RSVP" asp-route-id="@w.WeddingId">
+                        <button class="btn btn-outline-primary">
+                                @if (alreadyRsvpd)
+                                {
+                                <span>un-RSVP</span>
+                                }
+                                else
+                                {
+                                <span>RSVP</span>
+                                }
+                        </button>
+                    </form>
+                    }
+                    
+                </td>
+            </tr>
+
+        }
+    </table>
+
